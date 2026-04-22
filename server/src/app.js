@@ -11,7 +11,13 @@ import compression from 'compression';
 import mongoSanitize from 'express-mongo-sanitize';
 import xss from 'xss-clean';
 import hpp from 'hpp';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import rateLimit from 'express-rate-limit';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import { corsOptions, envVariables } from './config/index.js';
 import { globalErrorHandler, httpLoggerMiddleware, globalActivityLogger, errorActivityLogger } from './middlewares/index.js';
@@ -107,6 +113,33 @@ app.get('/api/health', (req, res) => {
  * Base: /api/v1
  */
 app.use('/api/v1', apiRouter);
+
+/**
+ * ML Model Proxy
+ * Proxies /api/ml requests to the Python FastAPI server
+ */
+const ML_URL = process.env.ML_API_URL || 'http://localhost:8001';
+app.use('/api/ml', createProxyMiddleware({
+    target: ML_URL,
+    changeOrigin: true,
+    pathRewrite: {
+        '^/api/ml': '', // remove /api/ml prefix when sending to python
+    },
+}));
+
+/**
+ * Serve Static Files in Production
+ */
+if (process.env.NODE_ENV === 'production') {
+    const clientBuildPath = path.join(__dirname, '../../client/dist');
+    app.use(express.static(clientBuildPath));
+
+    // Handle SPA routing - return index.html for all non-api routes
+    app.get('*', (req, res, next) => {
+        if (req.path.startsWith('/api')) return next();
+        res.sendFile(path.join(clientBuildPath, 'index.html'));
+    });
+}
 
 /**
  * Global Activity Logger Middleware

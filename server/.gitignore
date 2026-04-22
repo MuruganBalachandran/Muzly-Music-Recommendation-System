@@ -16,6 +16,9 @@ logs/
 npm-debug.log*
 yarn-debug.log*
 error.log
+
+# Project specific
+docs/
 out.log
 error_dump.txt
 out.txt

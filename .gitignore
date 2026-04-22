@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+.venv/
+env/
+venv/
+
+# Environment variables
+.env
+.env.*
+*.env
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Logs
+logs/
+*.log
+
+# Project specific
+docs/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
