@@ -108,4 +108,4 @@ def recommend(emotion: str = 'neutral', context: str = 'normal', climate: str = 
 if __name__ == '__main__':
     import uvicorn
     # when run from the `model` dir with `python -m src.api_server`
-    uvicorn.run("src.api_server:app", host='127.0.0.1', port=PORT, reload=True)
+    uvicorn.run("src.api_server:app", host='0.0.0.0', port=PORT, reload=False)
