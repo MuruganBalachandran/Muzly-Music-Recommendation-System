@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "muzly"
+version = "0.1.0"
+description = "Muzly Music Recommendation System"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
