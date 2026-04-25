@@ -5,7 +5,7 @@ description = "Muzly Music Recommendation System"
 authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "3.12.*"
 
 [build-system]
 requires = ["poetry-core"]
