@@ -59,7 +59,7 @@ ipython_config.py
 *.pth
 *.onnx
 *.pb
-emotion_model/best_emotion_model.h5
+!emotion_model/best_emotion_model.h5
 emotion_model/emotion_model.h5
 models/*.h5
 checkpoints/

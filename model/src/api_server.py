@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
 
-from src.config import SONGS_DIR
+from src.config import SONGS_DIR, OPENWEATHER_API_KEY, PORT
 from src.recommender import load_songs_df, recommend_songs_from_df
 from src.image_analysis import analyze_image_bytes
 # Import specific ML modules
@@ -79,8 +79,7 @@ async def recommend_upload(file: UploadFile = File(...), limit: int = 10):
         user_climate = 'clear'
 
     user_location = get_auto_location()
-    openweather_key = os.environ.get('OPENWEATHER_API_KEY')
-    weather = get_weather(openweather_key, user_location)
+    weather = get_weather(OPENWEATHER_API_KEY, user_location)
 
     results = recommend_songs_from_df(df, user_emotion=user_emotion, user_context=user_context, user_climate=user_climate, user_location=user_location, n=limit)
 
@@ -109,4 +108,4 @@ def recommend(emotion: str = 'neutral', context: str = 'normal', climate: str = 
 if __name__ == '__main__':
     import uvicorn
     # when run from the `model` dir with `python -m src.api_server`
-    uvicorn.run("src.api_server:app", host='127.0.0.1', port=8001, reload=True)
+    uvicorn.run("src.api_server:app", host='127.0.0.1', port=PORT, reload=True)

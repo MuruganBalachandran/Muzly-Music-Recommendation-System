@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from typing import Optional
-from src.config import SONGS_CSV_PATH
+from src.config import SONGS_CSV_PATH, MONGO_URI
 
 LANGUAGE_MAPPING = {
     "Tamil Nadu": {"primary": "Tamil", "fallbacks": ["English"]},
@@ -35,7 +35,6 @@ def load_songs_df() -> Optional[pd.DataFrame]:
 
     try:
         from pymongo import MongoClient
-        MONGO_URI = "mongodb://127.0.0.1:27017/"
         client = MongoClient(MONGO_URI)
         db = client["muzly"]
         col = db["songs"]
