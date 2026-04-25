@@ -2,6 +2,7 @@
 # Exit on error
 set -o errexit
 
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 
 # Pre-download models so they are baked into the image
