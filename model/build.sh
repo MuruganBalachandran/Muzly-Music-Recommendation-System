@@ -2,6 +2,12 @@
 # Exit on error
 set -o errexit
 
+echo "--- Debug Info ---"
+python --version
+pip --version
+uname -a
+echo "------------------"
+
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 
