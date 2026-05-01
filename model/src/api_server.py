@@ -16,10 +16,16 @@ app = FastAPI(title="Muzly Minimal API")
 # Add custom logging and error handling middleware
 app.add_middleware(LoggingAndErrorMiddleware)
 
-# Allow local dev origins
+# Allow local dev and production origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080", "http://localhost:3000", "http://127.0.0.1:5173"],
+    allow_origins=[
+        "http://localhost:8080",
+        "http://localhost:3000",
+        "http://127.0.0.1:5173",
+        "https://music-app.onrender.com",  # Production client
+        "https://music-backend-api.onrender.com",  # Production backend
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
