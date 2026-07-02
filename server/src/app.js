@@ -31,7 +31,7 @@ const app = express();
  * Trust proxy - Required for proper IP address extraction
  * Enables req.ip to work correctly behind proxies/load balancers
  */
-app.set('trust proxy', true);
+app.set('trust proxy', 1); // 1 = trust first proxy (e.g., Render/Heroku router)
 // #endregion
 
 // #region GLOBAL MIDDLEWARES
@@ -125,18 +125,9 @@ app.use('/api/ml', createProxyMiddleware({
 }));
 
 /**
- * Serve Static Files in Production
+ * Note: React frontend is deployed as a separate microservice.
+ * This Node.js server strictly acts as an API.
  */
-if (process.env.NODE_ENV === 'production') {
-    const clientBuildPath = path.join(__dirname, '../../client/dist');
-    app.use(express.static(clientBuildPath));
-
-    // Handle SPA routing - return index.html for all non-api routes
-    app.get('*', (req, res, next) => {
-        if (req.path.startsWith('/api')) return next();
-        res.sendFile(path.join(clientBuildPath, 'index.html'));
-    });
-}
 
 /**
  * Global Activity Logger Middleware
