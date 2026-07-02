@@ -36,7 +36,7 @@ def load_songs_df() -> Optional[pd.DataFrame]:
     try:
         from pymongo import MongoClient
         client = MongoClient(MONGO_URI)
-        db = client["muzly"]
+        db = client["test"]
         col = db["songs"]
         
         # EXCLUDING audioData and album images from the recommendation scan to save RAM
