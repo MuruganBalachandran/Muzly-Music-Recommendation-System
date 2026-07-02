@@ -1,8 +1,9 @@
 # Muzly.AI - AI-Powered Music Recommendation Platform
 
-## 🎵 Overview
-
 Muzly.AI is an innovative music recommendation platform that uses artificial intelligence, emotion detection, and contextual analysis to provide personalized music recommendations. The system analyzes facial expressions, environmental context, and user preferences to suggest the perfect soundtrack for any moment.
+
+
+https://github.com/user-attachments/assets/3d2696e0-8a2b-4a1e-bc4b-a0a2a3e87847
 
 ---
 
