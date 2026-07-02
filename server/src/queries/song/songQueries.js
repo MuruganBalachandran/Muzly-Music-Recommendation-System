@@ -104,11 +104,11 @@ export const getPaginatedSongsQuery = async (search = '', filters = {}, limit = 
         // execute dual-stage aggregation
         const result = await SongModel.aggregate([
             { $match: matchStage },
-            { $sort: { createdAt: -1 } },
             {
                 $facet: {
                     metadata: [{ $count: "total" }],
                     data: [
+                        { $sort: { createdAt: -1 } },
                         { $skip: skip },
                         { $limit: limit },
                         { $project: { audioData: 0 } }

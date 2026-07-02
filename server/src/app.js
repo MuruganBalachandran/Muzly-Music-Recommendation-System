@@ -61,10 +61,7 @@ const limiter = rateLimit({
     max: 150,
     windowMs: 60 * 60 * 1000,
     message: 'Too many requests from this IP, please try again in an hour!',
-    keyGenerator: (req) => {
-        // Use X-Forwarded-For header if available (behind proxy), otherwise use req.ip
-        return req.headers['x-forwarded-for']?.split(',')[0].trim() || req.ip || req.connection.remoteAddress;
-    },
+    // The default keyGenerator uses req.ip, which is correct because 'trust proxy' is set to true above.
     skip: (req) => {
         // Skip rate limiting for health checks
         return req.path === '/api/health';

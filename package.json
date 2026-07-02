@@ -1,0 +1,15 @@
+{
+  "name": "muzly-root",
+  "version": "1.0.0",
+  "description": "Root package to manage and run all microservices concurrently",
+  "scripts": {
+    "install:all": "npm install --prefix client && npm install --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "dev:model": "cd model && .venv\\Scripts\\python.exe api_server.py",
+    "dev": "concurrently -k -n \"CLIENT,SERVER,MODEL\" -c \"cyan,magenta,yellow\" \"npm run dev:client\" \"npm run dev:server\" \"npm run dev:model\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
