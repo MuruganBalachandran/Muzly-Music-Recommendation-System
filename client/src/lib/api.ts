@@ -3,7 +3,7 @@
  * API Configuration
  * Base URLs for different API services
  */
-export const API_BASE = import.meta.env.PROD ? '/api/ml' : (import.meta.env.VITE_API_BASE || 'http://localhost:8001');
+export const API_BASE = import.meta.env.PROD ? '/api/ml' : (import.meta.env.VITE_API_BASE || 'https://muzly-music-recommendation-system.onrender.com');
 export const NODE_API_BASE = import.meta.env.PROD ? '/api/v1' : (import.meta.env.VITE_NODE_API_BASE || 'http://localhost:5000/api/v1');
 //endregion
 

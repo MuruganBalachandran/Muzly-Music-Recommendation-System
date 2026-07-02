@@ -115,7 +115,7 @@ app.use('/api/v1', apiRouter);
  * ML Model Proxy
  * Proxies /api/ml requests to the Python FastAPI server
  */
-const ML_URL = process.env.ML_API_URL || 'http://localhost:8001';
+const ML_URL = process.env.ML_API_URL || 'https://muzly-music-recommendation-system.onrender.com';
 app.use('/api/ml', createProxyMiddleware({
     target: ML_URL,
     changeOrigin: true,

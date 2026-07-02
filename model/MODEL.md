@@ -304,16 +304,23 @@ songs_collection = db['songs']
 python -m pytest test/
 ```
 
-### Manual Testing
+### Manual Testing (Local)
 ```bash
 # Test emotion detection
-curl -X POST http://127.0.0.1:8000/detect-emotion \
+curl -X POST http://127.0.0.1:8001/detect-emotion \
   -F "image=@test_image.jpg"
 
 # Test recommendation
-curl -X POST http://127.0.0.1:8000/recommend \
+curl -X POST http://127.0.0.1:8001/recommend \
   -H "Content-Type: application/json" \
   -d '{"emotion":"happy","language":"english"}'
+```
+
+### Manual Testing (Production - Live)
+```bash
+# Test emotion detection against the deployed cloud model
+curl -X POST https://muzly-music-recommendation-system.onrender.com/detect-emotion \
+  -F "image=@test_image.jpg"
 ```
 
 ---
