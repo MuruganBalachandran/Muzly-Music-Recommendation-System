@@ -31,6 +31,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get('/')
+def root():
+    return {"status": "ok", "message": "Muzly Minimal API is running"}
+
+@app.get('/health')
+def health_check():
+    return {"status": "ok"}
+
 if os.path.exists(SONGS_DIR):
     app.mount("/songs", StaticFiles(directory=SONGS_DIR), name="songs")
     app.mount("/audio", StaticFiles(directory=SONGS_DIR), name="audio")
